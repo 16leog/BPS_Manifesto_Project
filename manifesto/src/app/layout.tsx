@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, Old_Standard_TT } from "next/font/google";
+import { Inter, Old_Standard_TT, Open_Sans } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -7,6 +7,12 @@ const oldStandard = Old_Standard_TT({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-old-standard-tt",
+});
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+  weight: "600",
 });
 
 export const metadata = {
@@ -22,13 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-HOMEPAGE_BGCOLOR">
-        <header className="bg-NAVBAR_COLOR text-white sticky top-0 z-10 content-center">
-          <section className="max-w-4xl mx-auto p-4 flex justify-center">
-            <h1 className="font-oldStandard">
-              <a href="#hero">M</a>
+        <nav className="bg-NAVBAR_COLOR text-white w-full top-0 z-10 flex items-center justify-between h-24 px-4 relative">
+          <div className="absolute left-8 bottom-4">
+            <div className="flex flex-col justify-center">
+              <div className="h-1 w-6 bg-white mb-1"></div>
+              <div className="h-1 w-6 bg-white mb-1"></div>
+              <div className="h-1 w-6 bg-white"></div>
+            </div>
+          </div>
+
+          <div className="absolute left-1/2 bottom-2 transform -translate-x-1/2 flex flex-col items-center">
+            <h1 className="text-MANIFESTO_COLOR text-3xl font-oldStandard font-normal">
+              M
             </h1>
-          </section>
-        </header>
+            <p className="font-openSans font-semibold">Manifesto</p>
+          </div>
+        </nav>
       </body>
     </html>
   );
