@@ -13,9 +13,10 @@ module.exports = {
         MANIFESTO_COLOR: "#eea86c",
       },
       fontFamily: {
-        modernNo20: "--font-ModernNo.20",
         oldStandard: "--font-old-standard-tt",
         openSans: "--font-open-sans",
+        montserrat: "--font-montserrat",
+        inter: "--font-inter",
       },
     },
   },

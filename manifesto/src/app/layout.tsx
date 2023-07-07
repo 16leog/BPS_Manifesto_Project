@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-HOMEPAGE_BGCOLOR">
+      <body>
         <nav className="bg-NAVBAR_COLOR text-white w-full top-0 z-10 flex items-center justify-between h-24 px-4 relative">
           <div className="absolute left-8 bottom-4">
             <div className="flex flex-col justify-center">
@@ -38,12 +38,13 @@ export default function RootLayout({
           </div>
 
           <div className="absolute left-1/2 bottom-2 transform -translate-x-1/2 flex flex-col items-center">
-            <h1 className="text-MANIFESTO_COLOR text-3xl font-oldStandard font-normal">
-              M
+            <h1 className="text-MANIFESTO_COLOR text-3xl">
+              <a className={oldStandard.className}>M</a>
             </h1>
-            <p className="font-openSans font-semibold">Manifesto</p>
+            <p className={openSans.className}>Manifesto</p>
           </div>
         </nav>
+        {children}
       </body>
     </html>
   );
