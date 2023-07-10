@@ -1,19 +1,19 @@
-"use client";
-import Image from "next/image";
-import ManifestoBanner from "../../public/Vector.svg";
-import { useState } from "react";
-import { Montserrat, Inter } from "next/font/google";
+'use client';
+import Image from 'next/image';
+import ManifestoBanner from '../../public/Vector.svg';
+import { useState } from 'react';
+import { Montserrat, Inter } from 'next/font/google';
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: "500",
-  variable: "--font-inter",
+  subsets: ['latin'],
+  weight: '500',
+  variable: '--font-inter',
 });
 
 const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: "500",
-  variable: "--font-montserrat",
+  subsets: ['latin'],
+  weight: '500',
+  variable: '--font-montserrat',
 });
 
 export default function Home() {
