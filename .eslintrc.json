@@ -9,6 +9,7 @@
     "React": "readonly"
   },
   "rules": {
+    "react/no-unescaped-entities": "off",
     "no-unused-vars": [
       1,
       {
