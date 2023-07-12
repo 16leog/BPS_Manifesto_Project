@@ -1,8 +1,9 @@
 'use client';
+import { Inter } from 'next/font/google';
 import Image from 'next/image';
-import ManifestoBanner from '../../public/Vector.svg';
-import { useState } from 'react';
-import { Montserrat, Inter } from 'next/font/google';
+import { useRouter } from 'next/navigation';
+import ManifestoBanner from '../../public/manifesto-banner.svg';
+import NoOne from './components/Homescreen/NoOne';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -10,13 +11,9 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: '500',
-  variable: '--font-montserrat',
-});
-
 export default function Home() {
+  const router = useRouter();
+
   return (
     <html lang="en" className="sm:scroll-smooth">
       <body className="min-h-screen bg-HOMEPAGE_BGCOLOR">
@@ -27,18 +24,12 @@ export default function Home() {
             alt="ManifestoBanner"
           />
         </div>
-        <div className="mt-36">
-          <h1 className="text-white text-center text-2xl">
-            <a className={montserrat.className}>
-              No one is currently signed in.
-            </a>
-          </h1>
-          <h1 className="text-white text-center text-2xl">
-            <a className={montserrat.className}>Be the first to sign in.</a>
-          </h1>
-        </div>
+        <NoOne />
         <div className="flex justify-center mt-44">
-          <button className="bg-MANIFESTO_COLOR w-44 h-12">
+          <button
+            onClick={() => router.push('/signin')}
+            className="bg-MANIFESTO_COLOR w-44 h-12"
+          >
             <h1 className="text-NAVBAR_COLOR">
               <a className={inter.className}>Sign In</a>
             </h1>
