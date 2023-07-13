@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import ManifestoBanner from '../../public/manifesto-banner.svg';
-import { signinList } from './common/SigninList';
 import NoOne from './components/Homescreen/NoOne';
 
 const inter = Inter({
@@ -12,7 +11,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-signinList;
+// signinList;
 
 export default function Home() {
   const router = useRouter();
