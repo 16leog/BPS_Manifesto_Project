@@ -50,7 +50,7 @@ export default function SignIn() {
     // Access the form data from the state variable 'formData'
     console.log(formData);
     // Perform further actions like sending data to a server or performing validation
-    localStorage.setItem('formData', JSON.stringify(formData));
+    //localStorage.setItem('formData', JSON.stringify(formData));
     // router.push('/');
   };
 

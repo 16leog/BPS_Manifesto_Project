@@ -15,9 +15,9 @@ const inter = Inter({
 
 export default function Home() {
   const router = useRouter();
-  const storedFormData = localStorage.getItem('formData');
-  const formData = storedFormData ? JSON.parse(storedFormData) : null;
-  const fullName = formData ? formData.fullName : '';
+  // const storedFormData = localStorage.getItem('formData');
+  // const formData = storedFormData ? JSON.parse(storedFormData) : null;
+  // const fullName = formData ? formData.fullName : '';
   return (
     <html lang="en" className="sm:scroll-smooth">
       <body className="min-h-screen bg-HOMEPAGE_BGCOLOR">
@@ -29,7 +29,7 @@ export default function Home() {
           />
         </div>
         <NoOne />
-        <div className="text-white">{fullName}</div>
+        {/* <div className="text-white">{fullName}</div> */}
         <div className="flex justify-center mt-44">
           <button
             onClick={() => router.push('/signin')}
