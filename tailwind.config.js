@@ -24,7 +24,7 @@ module.exports = {
         inter: '--font-inter',
       },
       backgroundImage: {
-        signinSkyline: url('/signin-skyline.svg'),
+        signinSkyline: url('/public/signin-skyline.svg'),
       },
     },
   },
