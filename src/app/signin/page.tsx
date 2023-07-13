@@ -51,7 +51,7 @@ export default function SignIn() {
     console.log(formData);
     // Perform further actions like sending data to a server or performing validation
     localStorage.setItem('formData', JSON.stringify(formData));
-    router.push('/');
+    // router.push('/');
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
