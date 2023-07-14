@@ -47,11 +47,11 @@ export default function SignIn() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    // Access the form data from the state variable 'formData'
-    console.log(formData);
-    // Perform further actions like sending data to a server or performing validation
-    //localStorage.setItem('formData', JSON.stringify(formData));
-    // router.push('/');
+    const storedFormData = localStorage.getItem('formData');
+    const formDataList = storedFormData ? JSON.parse(storedFormData) : [];
+    formDataList.push(formData);
+    localStorage.setItem('formData', JSON.stringify(formDataList));
+    router.push('/');
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
