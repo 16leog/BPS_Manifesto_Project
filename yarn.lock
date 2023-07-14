@@ -8444,7 +8444,7 @@ postcss-load-config@^4.0.1:
     lilconfig "^2.0.5"
     yaml "^2.1.1"
 
-postcss-loader@^7.0.2:
+postcss-loader@^7.0.2, postcss-loader@^7.3.3:
   version "7.3.3"
   resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-7.3.3.tgz#6da03e71a918ef49df1bb4be4c80401df8e249dd"
   integrity sha512-YgO/yhtevGO/vJePCQmTxiaEwER94LABZN0ZMT4A0vsak9TpO+RvKRs7EmJ8peIlB9xfXCsS7M8LjqncsUZ5HA==

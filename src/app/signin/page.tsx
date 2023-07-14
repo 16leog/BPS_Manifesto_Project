@@ -88,7 +88,7 @@ export default function SignIn() {
     }
 
     if (name === 'emergencyContactName') {
-      if (!/^[a-zA-Z\s]+$/.test(value)) {
+      if (value.length < 2 || value.length > 12 || /[^a-zA-Z\s]/.test(value)) {
         setEmergencyContactNameError(
           'Must be 2-12 characters long and have no special characters.'
         );
