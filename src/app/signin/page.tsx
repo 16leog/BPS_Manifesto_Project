@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { ChangeEvent, useEffect, useState } from 'react';
 import BackButton from '../../../public/back-button.svg';
 import SignInSkyline from '../../../public/signin-skyline.svg';
-import FormData from '../../../types';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,19 +18,20 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
-// interface FormData {
-//   fullName: string;
-//   phoneNumber: string;
-//   email: string;
-//   emergencyContactName: string;
-//   emergencyContactNumber: string;
-// }
-
-interface SignInProps {
-  _initialData?: FormData;
+interface FormData {
+  id: number;
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+  emergencyContactName: string;
+  emergencyContactNumber: string;
 }
 
-export default function SignIn({ _initialData }: SignInProps) {
+interface SignInProps {
+  initialData?: FormData;
+}
+
+export default function SignIn({ initialData }: SignInProps) {
   const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({
