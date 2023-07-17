@@ -28,10 +28,10 @@ const montserrat = Montserrat({
 // }
 
 interface SignInProps {
-  initialData?: FormData;
+  _initialData?: FormData;
 }
 
-export default function SignIn({ initialData }: SignInProps) {
+export default function SignIn({ _initialData }: SignInProps) {
   const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({
