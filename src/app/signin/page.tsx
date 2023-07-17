@@ -2,9 +2,10 @@
 import { Inter, Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import BackButton from '../../../public/back-button.svg';
 import SignInSkyline from '../../../public/signin-skyline.svg';
+import FormData from '../../../types';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,24 +19,49 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
-interface FormData {
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-  emergencyContactName: string;
-  emergencyContactNumber: string;
+// interface FormData {
+//   fullName: string;
+//   phoneNumber: string;
+//   email: string;
+//   emergencyContactName: string;
+//   emergencyContactNumber: string;
+// }
+
+interface SignInProps {
+  initialData?: FormData;
 }
 
-export default function SignIn() {
+export default function SignIn({ initialData }: SignInProps) {
   const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({
+    id: 0, // Initial ID can be 0
     fullName: '',
     phoneNumber: '',
     email: '',
     emergencyContactName: '',
     emergencyContactNumber: '',
   });
+
+  useEffect(() => {
+    // Retrieve the id of the FormData object to be edited from localStorage
+    const id = localStorage.getItem('editingFormId');
+
+    if (id) {
+      // Retrieve the corresponding FormData object from localStorage
+      const storedFormData = localStorage.getItem('formData');
+      const formDataList = storedFormData ? JSON.parse(storedFormData) : [];
+      console.log(formDataList);
+      const formDataToEdit = formDataList.find(
+        (formData: FormData) => formData.id === parseInt(id)
+      );
+
+      if (formDataToEdit) {
+        // Populate the form fields with the data of the FormData object to be edited
+        setFormData(formDataToEdit);
+      }
+    }
+  }, []);
 
   const [fullNameError, setFullNameError] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
@@ -45,11 +71,32 @@ export default function SignIn() {
   const [emergencyContactNumberError, setEmergencyContactNumberError] =
     useState('');
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
     const storedFormData = localStorage.getItem('formData');
     const formDataList = storedFormData ? JSON.parse(storedFormData) : [];
-    formDataList.push(formData);
+
+    const id = localStorage.getItem('editingFormId');
+    if (!id) {
+      // It's a new submission
+      formData.id = formDataList.length; // Use the length of the array as id
+      formDataList.push(formData);
+    } else {
+      // It's an edit
+      // Here you are modifying the original object directly,
+      // so there's no need to assign id to formData again.
+      const index = formDataList.findIndex(
+        (data: FormData) => data.id === parseInt(id)
+      );
+      if (index !== -1) {
+        formDataList[index] = formData;
+      }
+
+      // Remove the id of the FormData object to be edited from localStorage
+      localStorage.removeItem('editingFormId');
+    }
+
     localStorage.setItem('formData', JSON.stringify(formDataList));
     router.push('/');
   };
@@ -132,7 +179,9 @@ export default function SignIn() {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    className="outline outline-1 rounded mt-8 mx-8 h-12 w-72 "
+                    className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
+                      fullNameError ? 'outline-red-500' : ''
+                    }`}
                     placeholder="Full Name"
                     style={{ paddingLeft: '8px' }}
                   />
@@ -148,7 +197,9 @@ export default function SignIn() {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}
-                    className="outline outline-1 rounded mt-8 mx-8 h-12 w-72"
+                    className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
+                      phoneNumberError ? 'outline-red-500' : ''
+                    }`}
                     placeholder="Phone Number"
                     style={{ paddingLeft: '8px' }}
                   />
@@ -164,7 +215,9 @@ export default function SignIn() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="outline outline-1 rounded mt-8 mx-8 h-12 w-72"
+                    className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
+                      emailError ? 'outline-red-500' : ''
+                    }`}
                     placeholder="Email"
                     style={{ paddingLeft: '8px' }}
                   />
@@ -180,7 +233,9 @@ export default function SignIn() {
                     name="emergencyContactName"
                     value={formData.emergencyContactName}
                     onChange={handleChange}
-                    className="outline outline-1 rounded mt-8 mx-8 h-12 w-72"
+                    className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
+                      emergencyContactNameError ? 'outline-red-500' : ''
+                    }`}
                     placeholder="Emergency Contact Name"
                     style={{ paddingLeft: '8px' }}
                   />
@@ -196,16 +251,19 @@ export default function SignIn() {
                     name="emergencyContactNumber"
                     value={formData.emergencyContactNumber}
                     onChange={handleChange}
-                    className="outline outline-1 rounded mt-8 mx-8 h-12 w-72"
+                    className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
+                      emergencyContactNumberError ? 'outline-red-500' : ''
+                    }`}
                     placeholder="Emergency Contact Number"
                     style={{ paddingLeft: '8px' }}
                   />
+
+                  {emergencyContactNumberError && (
+                    <div className="text-red-500 my-0 text-sm mx-8">
+                      {emergencyContactNumberError}
+                    </div>
+                  )}
                 </div>
-                {emergencyContactNumberError && (
-                  <div className="text-red-500 my-0 text-sm mx-8">
-                    {emergencyContactNumberError}
-                  </div>
-                )}
               </div>
               <div className="flex justify-center mt-12">
                 <button

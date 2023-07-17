@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import deleteButton from '../../public/delete-button.svg';
 import editButton from '../../public/edit-button.svg';
 import ManifestoBanner from '../../public/manifesto-banner.svg';
+import FormData from '../../types';
 import NoOne from './components/Homescreen/NoOne';
 
 const inter = Inter({
@@ -24,20 +25,20 @@ const montserrat = Montserrat({
 
 export default function Home() {
   const router = useRouter();
-  const [names, setNames] = useState<string[]>([]);
+  const [formDataList, setFormDataList] = useState<FormData[]>([]);
 
   useEffect(() => {
     const storedFormData = localStorage.getItem('formData');
     const formDataList = storedFormData ? JSON.parse(storedFormData) : [];
-    let namesList = [];
-    for (let i = 0; i < formDataList.length; i++) {
-      namesList.push(formDataList[i].fullName);
-    }
-    setNames(namesList);
+    setFormDataList(formDataList);
   }, []);
 
-  const handleEdit = () => {
-    // handle edit functionality here
+  const handleEdit = (id: number) => {
+    // Save the id of the FormData object to be edited in localStorage
+    localStorage.setItem('editingFormId', id.toString());
+
+    // Redirect to the /signin page
+    router.push('/signin');
   };
 
   const handleDelete = (index: number) => {
@@ -48,20 +49,17 @@ export default function Home() {
 
     // If the user clicked "OK", delete the item
     if (confirmDelete) {
-      // Make a copy of the names array
-      const newNames = [...names];
+      // Make a copy of the formData array
+      const newFormDataList = [...formDataList];
 
       // Remove the item at the specified index
-      newNames.splice(index, 1);
+      newFormDataList.splice(index, 1);
 
-      // Update the names state
-      setNames(newNames);
+      // Update the formDataList state
+      setFormDataList(newFormDataList);
 
       // Update the localStorage
-      const storedFormData = localStorage.getItem('formData');
-      const formDataList = storedFormData ? JSON.parse(storedFormData) : [];
-      formDataList.splice(index, 1);
-      localStorage.setItem('formData', JSON.stringify(formDataList));
+      localStorage.setItem('formData', JSON.stringify(newFormDataList));
     }
   };
 
@@ -76,7 +74,7 @@ export default function Home() {
           />
         </div>
         <div className="w-full flex flex-col  h-72 sm:h-58 ">
-          {names.length === 0 ? (
+          {formDataList.length === 0 ? (
             <NoOne />
           ) : (
             <>
@@ -88,16 +86,18 @@ export default function Home() {
                 </h1>
               </div>
               <div className="overflow-y-auto">
-                {names.map((name, index) => (
+                {formDataList.map((formData, index) => (
                   <div key={index} className=" mx-1 justify-center">
                     <div className=" text-white flex flex-row justify-between items-center w-11/12">
                       <h1 className="ml-8">
-                        <a className={montserrat.className}>{name}</a>
+                        <a className={montserrat.className}>
+                          {formData.fullName}
+                        </a>
                       </h1>
                       <div className="w-20">
                         <button
                           className="pr-4 w-auto h-auto"
-                          onClick={() => handleEdit()}
+                          onClick={() => handleEdit(formData.id)}
                         >
                           <Image src={editButton} alt={'edit button'} />
                         </button>
@@ -118,7 +118,10 @@ export default function Home() {
         </div>
         <div className="flex justify-center mt-44">
           <button
-            onClick={() => router.push('/signin')}
+            onClick={() => {
+              localStorage.removeItem('editingFormId');
+              router.push('/signin');
+            }}
             className="bg-MANIFESTO_COLOR w-44 h-12"
           >
             <h1 className="text-NAVBAR_COLOR">
