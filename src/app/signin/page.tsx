@@ -28,10 +28,10 @@ interface FormData {
 }
 
 interface SignInProps {
-  initialData_?: FormData;
+  initialData?: FormData;
 }
 
-export default function SignIn({ initialData_ }: SignInProps) {
+export default function SignIn({ initialData }: any) {
   const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({
