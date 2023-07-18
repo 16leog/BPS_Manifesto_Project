@@ -9,6 +9,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        '75px': '75px',
+        '30px': '30px',
+      },
       colors: {
         NAVBAR_COLOR: '#1f1f39',
         HOMEPAGE_BGCOLOR: '#19192e',
@@ -24,7 +28,7 @@ module.exports = {
         inter: '--font-inter',
       },
       backgroundImage: {
-        signinSkyline: url('/public/signin-skyline.svg'),
+        signinSkyline: url('/signin-skyline.svg'),
       },
     },
   },

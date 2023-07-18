@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useEffect, useState } from 'react';
 import BackButton from '../../../public/back-button.svg';
+import manifestoSignInSkyline from '../../../public/manifestoSignInSkyline.svg';
 import SignInSkyline from '../../../public/signin-skyline.svg';
 
 const inter = Inter({
@@ -166,13 +167,13 @@ export default function SignIn({ initialData }: any) {
             </div>
           </button>
         </div>
-        <div className=" bg-SIGNIN_FORM_BGCOLOR mx-5 flex-grow-0 flex flex-col items-center justify-end">
-          <div className="justify-center">
+        <div className=" bg-SIGNIN_FORM_BGCOLOR md:w-[676px] mx-auto flex-grow flex flex-col items-center justify-end shadow-xl z-10">
+          <div className="  max-h-[886px] mx-auto">
             <form
               className="m-4 flex flex-col justify-center"
               onSubmit={handleSubmit}
             >
-              <div className="flex-col justify-center">
+              <div className="flex-col justify-center ">
                 <div className={inter.className}>
                   <input
                     type="text"
@@ -180,13 +181,13 @@ export default function SignIn({ initialData }: any) {
                     value={formData.fullName}
                     onChange={handleChange}
                     className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
-                      fullNameError ? 'outline-red-500' : ''
+                      fullNameError ? 'outline-red-500 mt-6' : ''
                     }`}
                     placeholder="Full Name"
                     style={{ paddingLeft: '8px' }}
                   />
                   {fullNameError && (
-                    <div className="text-red-500 my-0 text-sm mx-8">
+                    <div className="text-red-500 my-0 text-sm mx-8 w-72 ">
                       {fullNameError}
                     </div>
                   )}
@@ -198,13 +199,13 @@ export default function SignIn({ initialData }: any) {
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
-                      phoneNumberError ? 'outline-red-500' : ''
+                      phoneNumberError ? 'outline-red-500 mt-1' : ''
                     }`}
                     placeholder="Phone Number"
                     style={{ paddingLeft: '8px' }}
                   />
                   {phoneNumberError && (
-                    <div className="text-red-500 my-0 text-sm mx-8">
+                    <div className="text-red-500 my-0 text-sm mx-8 w-72">
                       {phoneNumberError}
                     </div>
                   )}
@@ -216,13 +217,13 @@ export default function SignIn({ initialData }: any) {
                     value={formData.email}
                     onChange={handleChange}
                     className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
-                      emailError ? 'outline-red-500' : ''
+                      emailError ? 'outline-red-500 mt-1' : ''
                     }`}
                     placeholder="Email"
                     style={{ paddingLeft: '8px' }}
                   />
                   {emailError && (
-                    <div className="text-red-500 my-0 text-sm mx-8">
+                    <div className="text-red-500 my-0 text-sm mx-8 w-72">
                       {emailError}
                     </div>
                   )}
@@ -234,13 +235,13 @@ export default function SignIn({ initialData }: any) {
                     value={formData.emergencyContactName}
                     onChange={handleChange}
                     className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
-                      emergencyContactNameError ? 'outline-red-500' : ''
+                      emergencyContactNameError ? 'outline-red-500 mt-1' : ''
                     }`}
                     placeholder="Emergency Contact Name"
                     style={{ paddingLeft: '8px' }}
                   />
                   {emergencyContactNameError && (
-                    <div className="text-red-500 my-0 text-sm mx-8">
+                    <div className="text-red-500 my-0 text-sm mx-8 w-72">
                       {emergencyContactNameError}
                     </div>
                   )}
@@ -252,20 +253,20 @@ export default function SignIn({ initialData }: any) {
                     value={formData.emergencyContactNumber}
                     onChange={handleChange}
                     className={`outline outline-1 rounded mt-8 mx-8 h-12 w-72 ${
-                      emergencyContactNumberError ? 'outline-red-500' : ''
+                      emergencyContactNumberError ? 'outline-red-500 mt-1' : ''
                     }`}
                     placeholder="Emergency Contact Number"
                     style={{ paddingLeft: '8px' }}
                   />
 
                   {emergencyContactNumberError && (
-                    <div className="text-red-500 my-0 text-sm mx-8">
+                    <div className="text-red-500 my-0 text-sm mx-8 w-72">
                       {emergencyContactNumberError}
                     </div>
                   )}
                 </div>
               </div>
-              <div className="flex justify-center mt-12">
+              <div className="flex justify-center mt-8">
                 <button
                   className="bg-SAVE_AND_SIGN_BUTTON_COLOR w-44 h-12 mb-12"
                   type="submit"
@@ -278,10 +279,18 @@ export default function SignIn({ initialData }: any) {
             </form>
           </div>
         </div>
-        <div className="absolute bottom-0 w-full flex-shrink-0">
+
+        <div className="absolute bottom-0 w-full flex-shrink-0 block sm:hidden">
           <Image
             className="w-full h-1/6"
             src={SignInSkyline}
+            alt="SignInSkyline"
+          />
+        </div>
+        <div className="absolute bottom-0 w-full flex-shrink-0 z-0 hidden sm:block">
+          <Image
+            className="w-full h-1/6"
+            src={manifestoSignInSkyline}
             alt="SignInSkyline"
           />
         </div>
