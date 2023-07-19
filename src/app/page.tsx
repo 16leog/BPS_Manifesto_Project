@@ -83,11 +83,12 @@ export default function Home() {
   };
 
   return (
-    <html lang="en" className="sm:scroll-smooth">
-      <body className="min-h-screen bg-HOMEPAGE_BGCOLOR sm:bg-NAVBAR_COLOR">
+    <main className="sm:scroll-smooth bg-HOMEPAGE_BGCOLOR">
+      <div className="min-h-screen bg-HOMEPAGE_BGCOLOR sm:bg-NAVBAR_COLOR">
+        <div className="bg-HOMEPAGE_BGCOLOR h-9 block sm:hidden"></div>
         <div className="block sm:hidden">
           <Image
-            className="w-full mt-9"
+            className="w-full "
             src={ManifestoBanner}
             alt="ManifestoBanner"
           />
@@ -183,7 +184,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </body>
-    </html>
+      </div>
+    </main>
   );
 }
