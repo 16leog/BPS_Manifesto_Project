@@ -22,8 +22,8 @@ const montserrat = Montserrat({
 export default function SignIn() {
   const router = useRouter();
   return (
-    <html lang="en" className="sm:scroll-smooth">
-      <body className="max-h-screen bg-SIGNIN_BGCOLOR flex flex-col">
+    <main className="sm:scroll-smooth">
+      <div className="max-h-screen bg-SIGNIN_BGCOLOR flex flex-col">
         <div>
           <button onClick={() => router.back()}>
             <div className="flex items-center ml-4 mt-4">
@@ -39,22 +39,22 @@ export default function SignIn() {
             <SigninForm />
           </div>
         </div>
-
-        <div className="absolute bottom-0 w-full flex-shrink-0 block sm:hidden">
+        <div className="bg-SIGNIN_BGCOLOR h-screen"></div>
+        <div className="absolute bottom-0 w-full flex-shrink-0 z-0 block sm:hidden  bg-SIGNIN_BGCOLOR">
           <Image
             className="w-full h-1/6"
             src={SignInSkyline}
             alt="SignInSkyline"
           />
         </div>
-        <div className="absolute bottom-0 w-full flex-shrink-0 z-0 hidden sm:block">
+        <div className="absolute bottom-0 w-full flex-shrink-0 z-0 hidden sm:block  bg-SIGNIN_BGCOLOR">
           <Image
             className="w-full h-1/6"
             src={manifestoSignInSkyline}
             alt="SignInSkyline"
           />
         </div>
-      </body>
-    </html>
+      </div>
+    </main>
   );
 }
